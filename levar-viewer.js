@@ -18,8 +18,17 @@ class LevarViewer {
 		levarFrame.setAttribute('src', `http://localhost:3001/?varid=31230426054690`);
 		// levarFrame.setAttribute('src', `https://shopifydependencies.s3.amazonaws.com/index.html?varid=${this.variantID}`);
 		levarFrame.setAttribute('id', 'LeverViewer');
+    levarFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
 		levarFrame.setAttribute('style', 'width:100vw; height:100vh; z-index: 999; position: fixed; top: 0px; right: 0px; left: 0px; bottom: 0px;');
 		document.body.appendChild(levarFrame);
+
+
+// addEventListener('mouseup', Handler)
+    setTimeout(function() {
+      let reactLevarIframe = document.getElementById("LeverViewer")
+      reactLevarIframe.contentWindow.addEventListener("click", myFunction);
+    }, 3000);
+    // reactLevarIframe.contentWindow.document.addEventListener("onclick", myFunction);
 		// this.viewer.requestFullscreen()
 	}
 
@@ -30,11 +39,10 @@ let levarViewer = new LevarViewer();
 
 
 
-document.getElementById("fname").addEventListener("change", myFunction);
-
 function myFunction() {
-  var x = document.getElementById("fname");
-  x.value = x.value.toUpperCase();
+  // var x = document.getElementById("LeverViewer");
+  console.log('in my function>>>>>>>>>');
+  // x.value = x.value.toUpperCase();
 }
 
 (window.onload = function() {
