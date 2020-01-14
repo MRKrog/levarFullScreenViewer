@@ -2,48 +2,33 @@ class LevarViewer {
   constructor() {
     this.name = 'Levar App';
 		this.iframeStyle = '';
+    this.iframeId = 'LevarViewer'
 		this.variantID = null;
 		this.vidList = [];
 		this.userAgent = window.navigator.userAgent;
 		this.viewer = document.documentElement
   }
 
-  launchIframe() {
-    console.log("Launching Iframe");
-  }
-
 	drawIframe() {
 		let levarFrame = document.createElement('iframe');
-
-		levarFrame.setAttribute('src', `http://localhost:3001/?varid=31230426054690`);
-		// levarFrame.setAttribute('src', `https://shopifydependencies.s3.amazonaws.com/index.html?varid=${this.variantID}`);
-		levarFrame.setAttribute('id', 'LeverViewer');
-    levarFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+		// levarFrame.setAttribute('src', `http://localhost:3001/?varid=31230426054690`);
+		levarFrame.setAttribute('src', `https://shopifydependencies.s3.amazonaws.com/index.html?varid=${this.variantID}`);
+		levarFrame.setAttribute('id', 'LevarViewer');
 		levarFrame.setAttribute('style', 'width:100vw; height:100vh; z-index: 999; position: fixed; top: 0px; right: 0px; left: 0px; bottom: 0px;');
 		document.body.appendChild(levarFrame);
+    this.viewer.requestFullscreen()
 
-
-// addEventListener('mouseup', Handler)
-    setTimeout(function() {
-      let reactLevarIframe = document.getElementById("LeverViewer")
-      reactLevarIframe.contentWindow.addEventListener("click", myFunction);
-    }, 3000);
-    // reactLevarIframe.contentWindow.document.addEventListener("onclick", myFunction);
-		// this.viewer.requestFullscreen()
+    levarFrame.onload = function() {
+      window.addEventListener("message", function(e) {
+          _deleteIframe()
+      });
+    }
 	}
 
 }
 
 let levarViewer = new LevarViewer();
 
-
-
-
-function myFunction() {
-  // var x = document.getElementById("LeverViewer");
-  console.log('in my function>>>>>>>>>');
-  // x.value = x.value.toUpperCase();
-}
 
 (window.onload = function() {
 
@@ -67,22 +52,56 @@ function anotherFunction(){
   console.log('anotherFunction');
 }
 
+
+
 function _deleteIframe() {
-  console.log('in deleteIframe');
-    // var iframe = document.getElementById(seek.config.iframeName);
-    // if (!iframe) {
-    //     return
-    // }
-    // _sendAnalyticsEvent(iframe.getAttribute("data-key"), "Closed", "webgl");
-    // if (iframe.loading_timeout) {
-    //     clearTimeout(iframe.loading_timeout)
-    // }
-    // iframe.parentNode.removeChild(iframe);
-    // document.body.style.overflow = seek.state.initialBodyOverflow;
-    // window.removeEventListener("onorientationchange", _calcVH, true);
-    // window.removeEventListener("resize", _calcVH, true)
+    console.log('in delete>>>>>>>');
+    var iframe = document.getElementById(levarViewer.iframeId);
+    if (!iframe) return
+    iframe.parentNode.removeChild(iframe);
 }
 
+// function _createIframe(key, viewer_options) {
+//     _deleteIframe();
+//     _sendAnalyticsEvent(key, "Launched", "webgl");
+//     var options = "?";
+//     if (viewer_options && viewer_options.length) {
+//         options += viewer_options.join("&")
+//     }
+//     if (seek.config.viewerOptions.length) {
+//         options += seek.config.viewerOptions.join("&")
+//     }
+//     var url = _getViewerURL(key);
+//     if (options !== "?") {
+//         url += options
+//     }
+//     var iframeStr = '<iframe id="' + seek.config.iframeName + '" src="' + url + '" ' + 'width="100%" height="100%" frameborder="0" title="3D Model Viewer"' + 'allowtransparency="true"' + 'data-key="' + key + '"></iframe>';
+//     var template = document.createElement("div");
+//     template.innerHTML = iframeStr;
+//     var iframe = template.firstChild;
+//     seek.state.iframeLoaded = false;
+//     iframe.loading_timeout = setTimeout(function() {
+//         iframe.loading_timeout = null;
+//         _deleteIframe();
+//         console.error("Loading iframe timed out")
+//     }, 1e4);
+//     iframe.onload = function() {
+//         setTimeout(function() {
+//             if (!seek.state.iframeLoaded) {
+//                 _deleteIframe();
+//                 console.error("Error loading iframe")
+//             }
+//         }, 500);
+//         clearTimeout(iframe.loading_timeout);
+//         iframe.loading_timeout = null
+//     };
+//     if (seek.state.platform.os === "iOS") {
+//         iframe.style.width = getComputedStyle(iframe).width;
+//         iframe.style.height = getComputedStyle(iframe).height;
+//         iframe.setAttribute("scrolling", "no")
+//     }
+//     return iframe
+// }
 
 
 
