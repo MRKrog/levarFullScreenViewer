@@ -20,7 +20,7 @@ class LevarViewer {
 		levarFrame.setAttribute('id', 'LeverViewer');
 		levarFrame.setAttribute('style', 'width:100vw; height:100vh; z-index: 999; position: fixed; top: 0px; right: 0px; left: 0px; bottom: 0px;');
 		document.body.appendChild(levarFrame);
-		this.viewer.requestFullscreen()
+		// this.viewer.requestFullscreen()
 	}
 
 }
@@ -28,21 +28,53 @@ class LevarViewer {
 let levarViewer = new LevarViewer();
 
 
-// var drawIframe = function(e) {
-// 	console.log('e', e);
-// 	// window.location.href = '#openModal';
-// 	// var target = document.getElementById('targetDiv');
-// 	// let levarFrame = document.createElement('iframe');
-//
-// 	newFrame.setAttribute('src', `https://shopifydependencies.s3.amazonaws.com/index.html?varid=${levarViewer.variantID}`);
-// 	// newFrame.setAttribute('src', `https://shopifydependencies.s3.amazonaws.com/index.html?varid=${ShopifyAnalytics.meta.selectedVariantId}`);
-// 	newFrame.setAttribute('id', 'levariframe');
-// 	// newFrame.setAttribute('data-variant', ShopifyAnalytics.meta.selectedVariantId);
-// 	newFrame.setAttribute('style', `height:58vh; width:48.5vw; margin-top:10px;`);
-//
-// 	document.body.appendChild(levarFrame);
-// 	return false;
-// };
+
+
+document.getElementById("fname").addEventListener("change", myFunction);
+
+function myFunction() {
+  var x = document.getElementById("fname");
+  x.value = x.value.toUpperCase();
+}
+
+(window.onload = function() {
+
+	levarViewer.variantID = 31230426054690
+
+	var viewInARButton = `
+		<a onclick="levarViewer.drawIframe()" data-levar="${levarViewer.variantID}">
+			<img id="hitter"
+		     src="https://shopifydependencies.s3.amazonaws.com/buttons/ARKIT_glyph1.svg"
+		     width="100px"
+		     height="87px"
+		     align="middle">
+		</a>`
+
+	var iframeBtn = document.getElementsByClassName('product-main-image')[0];
+	iframeBtn.insertAdjacentHTML('beforeend', viewInARButton);
+
+})(anotherFunction());
+
+function anotherFunction(){
+  console.log('anotherFunction');
+}
+
+function _deleteIframe() {
+  console.log('in deleteIframe');
+    // var iframe = document.getElementById(seek.config.iframeName);
+    // if (!iframe) {
+    //     return
+    // }
+    // _sendAnalyticsEvent(iframe.getAttribute("data-key"), "Closed", "webgl");
+    // if (iframe.loading_timeout) {
+    //     clearTimeout(iframe.loading_timeout)
+    // }
+    // iframe.parentNode.removeChild(iframe);
+    // document.body.style.overflow = seek.state.initialBodyOverflow;
+    // window.removeEventListener("onorientationchange", _calcVH, true);
+    // window.removeEventListener("resize", _calcVH, true)
+}
+
 
 
 
@@ -65,26 +97,6 @@ let levarViewer = new LevarViewer();
     //     console.warn("Failed to enter fullscreen")
     // }
 // }
-
-
-(window.onload = function() {
-
-	levarViewer.variantID = 31230426054690
-
-	var viewInARButton = `
-		<a onclick="levarViewer.drawIframe()" data-levar="${levarViewer.variantID}">
-			<img id="hitter"
-		     src="https://shopifydependencies.s3.amazonaws.com/buttons/ARKIT_glyph1.svg"
-		     width="100px"
-		     height="87px"
-		     align="middle">
-		</a>`
-
-	var xb = document.getElementsByClassName('product-main-image')[0];
-	xb.insertAdjacentHTML('beforeend', viewInARButton);
-
-})();
-
 
 // var drawIframe = function(e) {
 // 	console.log('e', e);
