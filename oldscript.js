@@ -862,57 +862,7 @@ var checkId = function(id, deviceType) {
 
 
 var themeGrabber = Shopify.theme.name;
-var setTheme = function(themeGrabber){
-	var themebitch;
-	switch(themeGrabber){
-		// IOS Highend
-		case 'Debut':
-			themebitch = "grid__item product-single__photos medium-up--one-half";
-			break;
-		case 'Venture':
-			themebitch = "photos__item photos__item--main";
-			break;
-		case 'launchpad-star':
-			themebitch = "grid__item large--one-half";
-			break;
-		case 'Simple':
-			themebitch = "product-single__photos";
-			break;
-		case 'Narrative':
-			themebitch = "product__image-container";
-			break;
-		case 'Brooklyn':
-			themebitch = "product-single__photo--flex-wrapper";
-			break;
-		case 'Supply':
-			themebitch = "product-photo-container";
-			break;
-		case 'Minimal':
-			themebitch = "grid__item post-large--one-half";
-			break;
-		case 'Prestige':
-			themebitch = "Product__SlideItem Product__SlideItem--image Carousel__Cell is-selected";
-			break;
-		case 'impulse':
-			themebitch = "starting-slide slick-slide slick-current slick-active";
-			break;
-		case 'Streamline-v0.0.3':
-			themebitch = "product__slide starting-slide";
-			break;
-		case 'venue':
-			themebitch = "product-single__photo__item";
-			break;
-		case 'icon':
-			themebitch = "product_image product-main-image selected aos-init aos-animate";
-			break;
-		case 'testament':
-			themebitch = "product-main-image selected";
-			break;
-		default:
-			console.log('Theme not found');
-	};
-	return themebitch;
-};
+
 var useClass = setTheme(themeGrabber);
 
 
