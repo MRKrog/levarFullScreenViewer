@@ -3,22 +3,45 @@
   <head>
     <meta charset="utf-8" />
     <title>React App</title>
+    <style>
+    @import url("https://fonts.googleapis.com/css?family=Dosis:400,700");
+
+      html {
+        height: 100%;
+        background-image: url("test.png");
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      body {
+        font: 16px/1.5 "Dosis", sans-serif;
+      }
+    </style>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <script async src="levar-viewer.js"></script>
 </head>
 <body>
-<!-- <button id="hitter" onclick = "window.location.href = '#openModal'" width="150px" height="100px" >Open Me</button> -->
-​
-<!-- <script>
-document.getElementById("hitter").addEventListener("click", drawIframe);
-</script> -->
 
-​<div class="product-main-image"></div>
 
-<!-- <div id="openModal" class="levarDialog">
-	<div>
-		<a href="#close" title="Close" class="close" onclick="getOuttaHere()">X</a>
-         <div id="targetDiv" data-vid="IDGrabber()"></div>
-	</div>
+<!-- <div class="levar-cta">
+  <div class="levar-left">
+    <img id="cta-logo" src="logo.svg"/>
+    <p id="levar-copy">Preview this product in Augmented Reality</p>
+  </div>
+  <div class="levar-right">
+    <a href="#" id="view-button">View In AR</a>
+    <a href="#" id="close-button"></a>
+  </div>
+</div> -->
+
+
+<!-- <div class="levar-cta">
+  <nav>
+    <div class="logo"><img src="logo.svg"/></div>
+    <button class="cta-contact">View In AR</button>
+  </nav>
 </div> -->
 
 </body>

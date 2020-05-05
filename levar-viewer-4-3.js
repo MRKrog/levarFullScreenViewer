@@ -2,15 +2,16 @@ function levarShopifyScript() {
   console.log("Running levar Shopify Script 149.");
 
   // For Development change to === // proudction !==
-  if (window.location.href.indexOf("/products/") === -1) {
+  if (window.location.href.indexOf("/products/") !== -1) {
 
     var levarPlugin = {
       id: 'LEVAR_VIEWER',
-      variantID: 31685892636765,
+      hashItem: '',
+      variantID: ShopifyAnalytics.meta.selectedVariantId,
       start: function() {
         console.log('Starting levAR Viewer...');
         let levarFrame = document.createElement('iframe');
-        levarFrame.setAttribute('src', `https://d31qwy1wuvutay.cloudfront.net/index.html?variant=${levarPlugin.variantID}&origin=shopify`);
+        levarFrame.setAttribute('src', `https://d31qwy1wuvutay.cloudfront.net/index.html?hash=${levarPlugin.hashItem}&origin=shopify`);
         levarFrame.setAttribute('id', `${levarPlugin.id}`);
         levarFrame.setAttribute('style', `width:100%; height:100%; z-index: 999999; border:none; margin:0; padding:0; overflow:hidden; position: fixed; top: 0px; right: 0px; left: 0px; bottom: 0px; overflow:hidden;`);
         levarFrame.setAttribute('allowFullScreen', true);
@@ -52,13 +53,20 @@ function levarShopifyScript() {
       }
     };
 
-    let url = `https://eo9muwoz3m.execute-api.us-east-1.amazonaws.com/dev/products/${levarPlugin.variantID}/hash`;
-
-    fetch(url)
+    fetch('https://d31qwy1wuvutay.cloudfront.net/req/vidHash.json')
       .then(response => response.json())
-      .then(productData => {
+      .then(vidHash => {
 
-        if(productData.status) {
+        var productExists = false;
+
+        for (let i = 0; i < vidHash.length; i++) {
+          if(levarPlugin.variantID == vidHash[i].variantID){
+            levarPlugin.hashItem = vidHash[i].hash;
+            productExists = true;
+          }
+        }
+
+        if(productExists) {
 
           function createLevarCTA() {
 
@@ -246,32 +254,6 @@ function levarShopifyScript() {
         }
       })
   }; // End if Product Page
-
-    // try {
-    // var vidUpdate = document.getElementById("SingleOptionSelector-0");
-    // vidUpdate.addEventListener("click", function() {
-    //   var options = vidUpdate.querySelectorAll("option");
-    //   var count = options.length;
-    //   if(typeof(count) === "undefined" || count < 2)
-    //   {
-    //       upgradeVID();
-    //   }
-    // });
-    //
-    // vidUpdate.addEventListener("change", function() {
-    //   if(vidUpdate.value)
-    //   {
-    //       upgradeVID();
-    //   }
-    // });
-    //
-    // function upgradeVID() {
-    // var variantFromUpdate = ShopifyAnalytics.meta.selectedVariantId;
-    // console.log("This is the VID in the upgradeVID function", variantFromUpdate);
-    // };
-    // } catch(error){
-    //   console.log("No select");
-
 
 };
 
